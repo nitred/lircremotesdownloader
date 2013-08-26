@@ -19,7 +19,7 @@ count1 = 0
 for link in soup.find_all('a')[5:]:
     count1 += 1       
     newurl = baseurl + link.get('href')
-    print str(count1) + " : " + newurl
+    print "Remote " + str(count1) + " : " + newurl
 
     newpath = remotedir + link.get('href')
     if not os.path.exists(newpath):
@@ -31,13 +31,14 @@ for link in soup.find_all('a')[5:]:
     #Skipping first 5; non related links
     for remote in remotes.find_all('a')[5:]:
         count2 += 1
-        #Ignoring directories; but the host is very accomodating
+        #Ignoring sub directories; the host is very accomodating by not using multiple formatting methods
         if(remote.get('alt') == "[DIR]" or remote.get('href')[-1] == "/"):
             continue
         
         finurl = newurl + remote.get('href')
-        print str(count2) + " - " + finurl
+        print "Model " + str(count2) + " - " + finurl
 
+        # In case you donot want JPG files to be downloaded; then uncomment the section below
         #if(finurl[-4:] == '.jpg'):
         #   print "Skipping JPG"
         #   continue
